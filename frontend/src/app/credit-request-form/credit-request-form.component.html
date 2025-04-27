@@ -1,0 +1,42 @@
+<h2>Solicitud de Crédito</h2>
+
+<form (ngSubmit)="onSubmit()">
+    <div>
+        <label for="clientId">Cliente:</label>
+        <select id="clientId" name="clientId" [(ngModel)]="clientId">
+            <option value="" disabled selected>Seleccionar cliente</option>
+            <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="phoneId">Modelo de Celular:</label>
+        <select id="phoneId" name="phoneId" [(ngModel)]="phoneId">
+            <option value="phone.id" disabled selected>Seleccionar modelo</option>
+            <option *ngFor="let phone of phones" [value]="phone.id">{{ phone.model }} (Precio: {{ phone.price | currency
+                }})</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="term">Plazo (meses):</label>
+        <input type="number" id="term" name="term" [(ngModel)]="term" min="1" required>
+    </div>
+
+    <div *ngIf="monthlyPayment">
+        <h3>Simulación de Cuota Mensual:</h3>
+        <p>{{ monthlyPayment | currency }}</p>
+    </div>
+
+    <button type="button" (click)="simulatePayment()" [disabled]="!clientId || !phoneId || !term">Simular Cuota</button>
+    <button type="submit" [disabled]="!clientId || !phoneId || !term || !monthlyPayment">Solicitar Crédito</button>
+
+    <div *ngIf="submissionResult">
+        <h3>Resultado de la Solicitud:</h3>
+        <p>{{ submissionResult }}</p>
+    </div>
+
+    <div *ngIf="errorMessage">
+        <p class="error">{{ errorMessage }}</p>
+    </div>
+</form>
