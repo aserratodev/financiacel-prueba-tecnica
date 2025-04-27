@@ -28,3 +28,21 @@ Homestead.json
 .env.production
 .phpactor.json
 auth.json
+
+# Angular specific مصنوعات
+node_modules/
+dist/
+build/
+.angular/
+.ng-cache/
+.DS_Store
+npm-debug.log*
+yarn-error.log*
+
+# Editor and IDE related
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
